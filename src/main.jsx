@@ -7,7 +7,12 @@ import { QueryClient,QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider } from '@mui/material';
 import theme from './theme/muiTheme.jsx';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  onError: (error) => {
+    // Perform actions or handle the error globally
+    console.error('An error occurred:', error);
+  },
+});
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

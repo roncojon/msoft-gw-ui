@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 // /* eslint-disable react/prop-types */
 import { useState } from "react";
-import { Accordion, AccordionDetails, AccordionSummary, Tooltip, Typography } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, CircularProgress, Tooltip, Typography } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 
@@ -10,6 +10,7 @@ import CircleIcon from "@mui/icons-material/Circle";
 import { getOneGateway } from "../../../api/services/gateways";
 import { useQuery } from "@tanstack/react-query";
 import { DevicesContainer } from "../Devices/DevicesContainer";
+import Errors from "../../common/Errors";
 
 const AccordionSummaryRow = ({ children }) => (
   <div
@@ -38,11 +39,7 @@ const AccordionSummaryCol = (props) => (
 const GatewayUnit = ({ gw ,refetchReq}) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  /* const reqSingleGateway = async () => {
-    await getOneGateway(gw.serialNumber);
-  }; */
-
-  const { isLoading, error, data, isFetching, refetch } = useQuery({
+  const { isLoading, error, data,  refetch } = useQuery({
     queryKey: ["oneGateway",gw.serialNumber],
     queryFn: () => getOneGateway(gw.serialNumber),
     retry: false,
@@ -55,12 +52,7 @@ const GatewayUnit = ({ gw ,refetchReq}) => {
     setIsExpanded(!isExpanded);
   };
 
-  console.log("single gateway data");
-  console.log(data);
-
   const refetchDevicesHandler = () =>{
-    // console.log('deleteddd')
-
     refetchReq();
     refetch();
   }
@@ -111,10 +103,12 @@ const GatewayUnit = ({ gw ,refetchReq}) => {
           </AccordionSummaryRow>
         </div>
       </AccordionSummary>
-      {data && !isLoading &&
+      {isLoading ? <CircularProgress/> :
+      (data  && !error) ?
       <AccordionDetails>
         <DevicesContainer devices={data.gateway.devices} onDelete={refetchDevicesHandler} gwSerialNumber={gw.serialNumber} onNewDevice={refetchDevicesHandler}/>
-      </AccordionDetails>
+      </AccordionDetails> :
+      <Errors error={error}/>
       }
     </Accordion>
   );

@@ -1,4 +1,5 @@
 import './App.css';
+import SnackbarError from './components/common/SnackBarError';
 import GatewaysContainer from './components/containers/Gateways/Gateways';
 import { useQueryErrorResetBoundary } from '@tanstack/react-query';
 function App() {
@@ -8,6 +9,7 @@ console.log(error)
   return (
     <>
       <GatewaysContainer/>
+      <SnackbarError />
     </>
   );
 }

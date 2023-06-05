@@ -4,6 +4,9 @@ import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CircleIcon from "@mui/icons-material/Circle";
 import { deleteDevice } from "../../../api/services/devices";
+import * as React from 'react';
+import {AppContext} from '../../../context/index'
+
 
 const AccordionSummaryRow = ({ children }) => (
   <div
@@ -31,8 +34,10 @@ const AccordionSummaryCol = (props) => (
 );
 
 const DeviceUnit = ({ device, onDelete }) => {
+  const {setError} = React.useContext(AppContext)
+
   const deleteHandler = ()=>{
-    deleteDevice(device.uid).then(()=>{onDelete()})
+    deleteDevice(device.uid).then(()=>{onDelete()}).catch((error)=>{setError(error)})
   }
 
   return (
