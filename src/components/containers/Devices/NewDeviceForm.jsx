@@ -71,9 +71,15 @@ const handleSubmit = async () => {
     setDisabledSubmit(false)
   }, [deviceVendor, selectedDate])
   
+ const closeHandler = ()=>{
+  setDeviceVendor("");
+  setSelectedDate(null);
+  setDisabledSubmit(true);
+  onClose();
+ }
 
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog open={open} onClose={closeHandler}>
       <div
         style={{
           display: "flex",
