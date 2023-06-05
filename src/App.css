@@ -1,11 +1,14 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  /* padding-top: 2rem;
+  padding-bottom: 2rem; */
   text-align: center;
+  min-height: 100vh;
+  width: 100%;
 }
 
-.logo {
+/* .logo {
   height: 6em;
   padding: 1.5em;
   will-change: filter;
@@ -25,18 +28,21 @@
   to {
     transform: rotate(360deg);
   }
-}
+} 
 
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
   }
 }
-
+*/
 .card {
-  padding: 2em;
+  margin: 0 auto;
+  padding: 1em;
+  width: 80% ;
+  min-width: 400px;
 }
 
-.read-the-docs {
+/* .read-the-docs {
   color: #888;
-}
+} */
