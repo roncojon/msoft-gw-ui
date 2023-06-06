@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
+import * as React from 'react';
 import {
   Button,
   Dialog,
@@ -15,8 +16,11 @@ import { useState } from "react";
 import { postDevice } from "../../../api/services/devices";
 import { useEffect } from "react";
 import dayjs from "dayjs";
+import { AppContext } from '../../../context';
 
 const NewDeviceForm = ({ open, gwSerialNumber, onComplete, onClose}) => {
+  const {setError} = React.useContext(AppContext)
+
   // VENDOR
   const [deviceVendor, setDeviceVendor] = useState("");
   const handleDeviceVendorChange = (event) => {
@@ -54,7 +58,9 @@ const handleSubmit = async () => {
         setDeviceVendor("");
         setSelectedDate(null);
         setDisabledSubmit(true)
-        onComplete();onClose()})
+        setStatus("online");
+        onComplete();onClose()}).catch((error)=>{
+      setError(error)})
     //   console.log("Response data from post", responseData);
 
       // Handle the response data if needed
@@ -74,6 +80,7 @@ const handleSubmit = async () => {
  const closeHandler = ()=>{
   setDeviceVendor("");
   setSelectedDate(null);
+  setStatus("online");
   setDisabledSubmit(true);
   onClose();
  }
