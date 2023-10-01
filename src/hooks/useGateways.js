@@ -8,7 +8,9 @@ const useGateways = (isQueryEnabled) => {
         queryFn: getGateways,
         retry:false,
         refetchOnWindowFocus:false,
-        enabled:isQueryEnabled
+        enabled:isQueryEnabled,
+        // By default reactQuery doesnt allow querys while the pc is offline, with this option, it allows it.
+        // networkMode:'always'
       });
 
       const createGateway = async (gatewayData) => {

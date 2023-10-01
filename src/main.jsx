@@ -12,6 +12,7 @@ const queryClient = new QueryClient({
     // Perform actions or handle the error globally
     console.error('An error occurred:', error);
   },
+  defaultOptions: { queries: { networkMode: 'always' } },
 });
 
 ReactDOM.createRoot(document.getElementById('root')).render(
