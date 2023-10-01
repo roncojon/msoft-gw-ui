@@ -5,8 +5,7 @@ import { useQueryErrorResetBoundary } from '@tanstack/react-query';
 
 function App() {
 const {error} = useQueryErrorResetBoundary();
-console.log('error making request :)')
-console.log(error)
+console.log('error making request. :)',error)
   return (
     <>
       <GatewaysContainer/>

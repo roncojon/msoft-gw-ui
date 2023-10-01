@@ -36,7 +36,7 @@ const AccordionSummaryCol = (props) => (
     {props.children}
   </div>
 );
-const GatewayUnit = ({ gw ,refetchReq}) => {
+const GatewayUnit = ({ gw /* ,refetchReq */}) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const { isLoading, error, data,  refetch } = useQuery({
@@ -53,7 +53,7 @@ const GatewayUnit = ({ gw ,refetchReq}) => {
   };
 
   const refetchDevicesHandler = () =>{
-    refetchReq();
+    // refetchReq();
     refetch();
   }
 

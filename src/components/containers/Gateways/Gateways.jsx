@@ -12,7 +12,7 @@ const GatewaysContainer = () => {
   const [openDialog, setOpenDialog] = React.useState(false);
   const { setError } = React.useContext(AppContext);
 
-  const { isLoading, error, data, createGateway, refetch } = useGateways(true);
+  const { isLoading, error, data, createGateway/* , refetch  */} = useGateways(true);
 
   const closeDialogHandler = () => {
     setOpenDialog(false);
@@ -20,7 +20,8 @@ const GatewaysContainer = () => {
 
   const handleCreateGateway = (gatewayPostData) => {
     setOpenDialog(true);
-    createGateway(gatewayPostData).catch((error) => {setError(error)}); // Call the createGateway function to make the POST request
+    // Call the createGateway function to make the POST request
+    createGateway(gatewayPostData).catch((error) => {setError(error)}); 
     closeDialogHandler();
   };
   return (
@@ -43,13 +44,10 @@ const GatewaysContainer = () => {
             onComplete={handleCreateGateway}
             onClose={closeDialogHandler}
           />
-          {/* <CustomButton onClick={handleGetSingleGateway}>
-          Get Single Gateway Data
-        </CustomButton> */}
           {data && (
             <>
               <Divider />
-              <GatewaysList gatewaysList={data} refetch={refetch} />
+              <GatewaysList gatewaysList={data}  />
             </>
           )}
         </>
